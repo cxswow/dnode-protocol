@@ -45,7 +45,7 @@ Proto.prototype.cull = function (id) {//向远端请求删除一个方法，本�
 };
 
 Proto.prototype.request = function (method, args) {
-    var scrub = this2.scrubber.scrub(args);//格式化要发送的消息，主要为建立方法与id链接
+    var scrub = this.scrubber.scrub(args);//格式化要发送的消息，主要为建立方法与id链接
     
     this.emit('request', {//产生request事件并发送消息，{...}为发送的消息内容
         method : method,
@@ -68,7 +68,7 @@ Proto.prototype.handle = function (req) {//req为消息
         //     "callbacks": { "0": ["0"], "1": ["1"] },
         //     "links": []
         // }
-        if (self.callbacks.remote[id] === undefined) {
+        if (self.callbacks.remote[id] === undefined) {//建立远端的回调函数
             // create a new function only if one hasn't already been created
             // for a particular id
             var cb = function () {
