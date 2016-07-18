@@ -160,3 +160,6 @@ c处理该消息就比较简单了，此时只要调用`c.callbacks.local[0]`得
 解析时根据`"from"`的值（路径）得到要循环的值（`{ "a" : 5, "b" : [ { "c" : 5 } ,'[Circular]'] }`），根据`"to"`的值（路径）得到循环的值应该放置的位置（`'[Circular]']`所处的位置），然后用循环值取代`'[Circular]']`，类似于执行`data.b.push(data)`。
 
 引用本身????
+
+
+参考文章： [dnode 协议教程](http://www.jianshu.com/p/0e17f7419cc8)
