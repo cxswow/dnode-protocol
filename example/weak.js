@@ -11,13 +11,13 @@ var s = (function () {
     };
     return proto(cons, {//选择了可选项wrap和unwrap
         wrap : function (cb, id) {
-            return weak(cb, function () {
+            return weak(cb, function () {//将强引用删除，改为弱引用
                 console.log('s.cull(' + id + ')')
                 s.cull(id);
             });
         },
         unwrap : function (ref, id) {
-            var cb = weak.get(ref);
+            var cb = weak.get(ref);//重新获得ref的强引用
             return cb || function () {};
         }
     });
