@@ -9,7 +9,7 @@ var s = (function () {
         },
         y : 555
     };
-    return proto(cons, {
+    return proto(cons, {//选择了可选项wrap和unwrap
         wrap : function (cb, id) {
             return weak(cb, function () {
                 console.log('s.cull(' + id + ')')

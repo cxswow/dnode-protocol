@@ -21,8 +21,8 @@ function Proto (cons, opts) {//cons为自带的方法，可缺
     
     self.remote = {};//远端方法
     self.callbacks = { local : [], remote : [] };//包含本地的回调函数和远端的回调函数，默认都为空
-    self.wrap = opts.wrap;//wrap；包，缠绕？？？
-    self.unwrap = opts.unwrap;
+    self.wrap = opts.wrap;//可选项，将回调函数打包，使得可以在每个方法以外进行一些固定处理
+    self.unwrap = opts.unwrap;//与wrap要一起出现，callbacks.remote里存的是wrap以后的函数，原始回调函数要通过unwrap获得
     
     self.scrubber = scrubber(self.callbacks.local);//本地的回调函数传给scrubber（准备生成方法交换消息）
     
@@ -74,10 +74,10 @@ Proto.prototype.handle = function (req) {//req为消息
             var cb = function () {
                 self.request(id, [].slice.apply(arguments));//request = function (method, args),像远端发送方法调用,arguments为空
             };
-            self.callbacks.remote[id] = self.wrap ? self.wrap(cb, id) : cb;///？？？wrap？？？
+            self.callbacks.remote[id] = self.wrap ? self.wrap(cb, id) : cb;//.callbacks.remote存放回调函数或wrap后的回调函数
             return cb;
         }
-        return self.unwrap
+        return self.unwrap//.callbacks.remote里已经有内容了要判断是否需要unwrap来获得原始回调函数
             ? self.unwrap(self.callbacks.remote[id], id)
             : self.callbacks.remote[id]
         ;
