@@ -12,7 +12,7 @@ dnode协议的消息采用JSON方式表示，以新行符进行消息分割。
 
 `method`的值标识消息类型，`arguments`一般是告诉对方“我有哪些方法”或调用方法传过去的参数，`callbacks`是使得可以通过id来调用对应的方法，这里也过滤了`arguments`里非方法的部分，`links`在`arguments`里有循环数据结构时才有内容。
 # 举个例子
-有如下一段代码：
+[dnode-protocol](https://github.com/substack/dnode-protocol)本身提供了一个例子，代码如下：
 
 	var proto = require('../');//proto现在只能模拟两端
     
