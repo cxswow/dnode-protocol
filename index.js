@@ -26,8 +26,8 @@ function Proto (cons, opts) {//cons为自带的方法，可缺
     
     self.scrubber = scrubber(self.callbacks.local);//本地的回调函数传给scrubber（准备生成方法交换消息）
     
-    if (typeof cons === 'function') {//只提供了一个方法，instance即args，
-        self.instance = new cons(self.remote, self);//？？？大概是转为{..}
+    if (typeof cons === 'function') {//只提供了一个方法，instance为该方法，将.remote和proto本身交给该方法
+        self.instance = new cons(self.remote, self);
     }
     else self.instance = cons || {};//不提供任何东西或提供多个（{。。。}）
 }
